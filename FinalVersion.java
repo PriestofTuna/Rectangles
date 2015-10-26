@@ -1,67 +1,103 @@
 import javax.swing.JOptionPane;
 
-public class Assignment3 {
-	public enum AccountType {
-		Admin, Student, Staff
-	};
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
+public class AuthenticationGUI extends Application {
+	public enum AccountType { Admin, nah};
 	public static void main(String[] args) {
-		
-		AccountType[] choices = { AccountType.Staff, AccountType.Staff, AccountType.Student };
-		
-		String TrueUser, TruePassword, password, TrueUserPass, user;
-		TrueUser = ("name");
-		TruePassword = ("password");
-		user = JOptionPane.showInputDialog("Input your Username");
-		TrueUserPass = (TrueUser + TruePassword);
-		TrueUserPass.equals(AccountType.Admin);
-		// int occurances = String.frequency(user, "name");
-		if (user.equals(TrueUser)) {
-			
-			password = JOptionPane.showInputDialog("Input your password");
-			if (password.equals(TruePassword)) {
+		launch(args);
+		// Main is not required in gitbash, remember not to copy and paste code.
+		// Make new code off this design
+	}
 
-				JOptionPane.showMessageDialog(null, "Hello, please choose your account type " + TrueUser);
-				while (true) {
+	@Override
+	public void start(Stage primaryStage) {
+		primaryStage.setTitle("Authentication");
+		TextField usernameTxtFld = new TextField();
+		PasswordField passwordTxtFld = new PasswordField();
 
-					// AccountType select = (AccountType)
-					// JOptionPane.showInputDialog("a")
-					// null, "Choose account type...","Account
-					// Type",JOptionPane.INFORMATION_MESSAGE,
-					// null,choices,choices[3]);
+		Label UserLbl = new Label("Username");
+		Label PassLbl = new Label("Password");
 
-					AccountType select = (AccountType) JOptionPane.showInputDialog(null, "Enter the month.",
-							// the line below this one is the out of bounds line
-							"Account Type", JOptionPane.INFORMATION_MESSAGE, null, choices, choices[3]);
-					select = (AccountType) JOptionPane.showInputDialog(null, "enter your account", "Account Type",
-							JOptionPane.INFORMATION_MESSAGE, null, choices, choices[5]);
-
-					while (true) {
-						if (user + password != ("namepassword")) {
-
-							switch (select) {
-							case Admin:
-								JOptionPane.showMessageDialog(null, "Welcome Admin! You can update and read file.");
-								break;
-							case Student:
-								JOptionPane.showMessageDialog(null, "Welcome Student! You can only read file.");
-								break;
-							case Staff:
-								JOptionPane.showMessageDialog(null,
-										"Welcome Staff! You can update, read, add, delete file.");
-								break;
-							}
-
+		Button submit = new Button("Submit");
+		submit.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				int i=0;
+				
+				String inputUser = "";
+				String inputPass = "";
+				String Username = "Tuna";
+				String Password = "Magic";
+				AccountType [] account= {AccountType.Admin, AccountType.nah};
+				//boolean found = true;
+				// do {
+				inputUser = usernameTxtFld.getText();
+				inputPass = passwordTxtFld.getText();
+				if (inputUser.equals(Username) && (inputPass.equals(Password))) {
+					JOptionPane.showMessageDialog(null, "welcome" + inputUser);
+					do {
+						AccountType select = (AccountType) JOptionPane.showInputDialog(null, "select account type", "Account Type", 
+								JOptionPane.INFORMATION_MESSAGE, null, account, account[0]);
+						switch (select) {
+						case Admin:
+							JOptionPane.showMessageDialog(null, "Welcome! ");
+							
+							break;
+						case nah:
+							JOptionPane.showMessageDialog(null, "Incorrect account");
+						    i++;
+							break;
 						}
-					}
+					} while (i < 3);
+					// break;
+
+				} else {
+					JOptionPane.showMessageDialog(null, "failure");
 				}
 
-			} else if (password != (TruePassword)) {
-				password = JOptionPane.showInputDialog("Incorrect password, please Input your password");
-			}
-		} else if (user != (TrueUser)) {
-			user = JOptionPane.showInputDialog("incorrect username, please Input your Username");
+				// } while (!inputUser.equals(Username) &&
+				// (!inputPass.equals(Password)));
 
-		}
+				// for (int i = 0; i < 3; i++) {
+				// inputUser = usernameTxtFld.getText();
+				// inputPass = passwordTxtFld.getText();
+				// if (inputUser.equals(Username) &&
+				// (inputPass.equals(Password))) {
+				// JOptionPane.showMessageDialog(null, "Welcome" + inputUser);
+				// i = 12;
+				// } else {
+
+				// }
+				// }
+
+			}
+
+		});
+
+		GridPane grid2 = new GridPane();
+		grid2.setAlignment(Pos.CENTER);
+		grid2.setVgap(10);
+		;
+
+		grid2.add(UserLbl, 0, 0);
+		grid2.add(PassLbl, 0, 1);
+		grid2.add(usernameTxtFld, 1, 0);
+		grid2.add(passwordTxtFld, 1, 1);
+		grid2.add(submit, 1, 2);
+		Scene scene = new Scene(grid2, 500, 500);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 }
