@@ -1,103 +1,24 @@
-import javax.swing.JOptionPane;
+import java.awt.Graphics;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javax.swing.JApplet;
 
-public class AuthenticationGUI extends Application {
-	public enum AccountType { Admin, nah};
-	public static void main(String[] args) {
-		launch(args);
-		// Main is not required in gitbash, remember not to copy and paste code.
-		// Make new code off this design
+public class Tick extends JApplet {
+    public void paint(Graphics canvas) {
+    	canvas.drawLine(250, 100, 250, 500);
+    	canvas.drawLine(500,  100, 500, 500);
+    	canvas.drawLine(590, 400, 150, 400);
+    	canvas.drawLine(590, 200, 150, 200);
+    	canvas.drawLine(450, 250,250,370);
+    	canvas.drawLine(450, 370, 250, 250);
+    	canvas.drawLine(600, 370, 550, 250);
+    	canvas.drawLine(600, 250, 550, 370);
+    	canvas.drawLine(100, 250, 175, 370);
+    	canvas.drawLine(175, 250, 100, 370);
+    	canvas.drawLine(0, 300, 700, 300);
+    	canvas.drawOval(115, 80, 120, 120);
+      //  canvas.drawOval(50, 50, 100, 100);
+        //canvas.drawOval(70, 10, 10, 10);
+    }
 	}
 
-	@Override
-	public void start(Stage primaryStage) {
-		primaryStage.setTitle("Authentication");
-		TextField usernameTxtFld = new TextField();
-		PasswordField passwordTxtFld = new PasswordField();
 
-		Label UserLbl = new Label("Username");
-		Label PassLbl = new Label("Password");
-
-		Button submit = new Button("Submit");
-		submit.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
-				int i=0;
-				
-				String inputUser = "";
-				String inputPass = "";
-				String Username = "Tuna";
-				String Password = "Magic";
-				AccountType [] account= {AccountType.Admin, AccountType.nah};
-				//boolean found = true;
-				// do {
-				inputUser = usernameTxtFld.getText();
-				inputPass = passwordTxtFld.getText();
-				if (inputUser.equals(Username) && (inputPass.equals(Password))) {
-					JOptionPane.showMessageDialog(null, "welcome" + inputUser);
-					do {
-						AccountType select = (AccountType) JOptionPane.showInputDialog(null, "select account type", "Account Type", 
-								JOptionPane.INFORMATION_MESSAGE, null, account, account[0]);
-						switch (select) {
-						case Admin:
-							JOptionPane.showMessageDialog(null, "Welcome! ");
-							
-							break;
-						case nah:
-							JOptionPane.showMessageDialog(null, "Incorrect account");
-						    i++;
-							break;
-						}
-					} while (i < 3);
-					// break;
-
-				} else {
-					JOptionPane.showMessageDialog(null, "failure");
-				}
-
-				// } while (!inputUser.equals(Username) &&
-				// (!inputPass.equals(Password)));
-
-				// for (int i = 0; i < 3; i++) {
-				// inputUser = usernameTxtFld.getText();
-				// inputPass = passwordTxtFld.getText();
-				// if (inputUser.equals(Username) &&
-				// (inputPass.equals(Password))) {
-				// JOptionPane.showMessageDialog(null, "Welcome" + inputUser);
-				// i = 12;
-				// } else {
-
-				// }
-				// }
-
-			}
-
-		});
-
-		GridPane grid2 = new GridPane();
-		grid2.setAlignment(Pos.CENTER);
-		grid2.setVgap(10);
-		;
-
-		grid2.add(UserLbl, 0, 0);
-		grid2.add(PassLbl, 0, 1);
-		grid2.add(usernameTxtFld, 1, 0);
-		grid2.add(passwordTxtFld, 1, 1);
-		grid2.add(submit, 1, 2);
-		Scene scene = new Scene(grid2, 500, 500);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
-}
